@@ -1,14 +1,19 @@
-// app/layout.js
-import Sidebar from './components/Sidebar';
-import './globals.css';
+"use client";
+
+import { usePathname } from "next/navigation";
+import Sidebar from "./components/Sidebar";
+import "./globals.css";
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+
+  const hideSidebar = pathname === "/login";
+
   return (
     <html lang="en">
-      <head />
       <body className="bg-slate-50 min-h-screen">
         <div className="flex">
-          <Sidebar />
+          {!hideSidebar && <Sidebar />}
           <main className="flex-1 p-8">{children}</main>
         </div>
       </body>
